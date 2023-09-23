@@ -8,5 +8,9 @@ export default createTheme({
     secondary: {
       main: "#0a504a",
     },
+    background: {
+      default: "#fff4f4",
+      paper: "#fff",
+    },
   },
 });
