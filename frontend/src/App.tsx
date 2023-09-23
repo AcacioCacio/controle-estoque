@@ -1,8 +1,11 @@
+import defaultTheme from "./data/defaultTheme";
+import {ThemeProvider, Typography} from "@mui/material";
+
 function App() {
   return (
-    <div>
-      <h1>Teste</h1>
-    </div>
+    <ThemeProvider theme={defaultTheme}>
+      <Typography sx={{color: "primary.main"}}>Teste</Typography>
+    </ThemeProvider>
   );
 }
 
