@@ -1,10 +1,11 @@
 import defaultTheme from "./data/defaultTheme";
-import { ThemeProvider, Typography } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
+import { AuthView } from "./components/AuthView";
 
 function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Typography sx={{ color: "primary.main" }}>Teste</Typography>
+      <AuthView />
     </ThemeProvider>
   );
 }
