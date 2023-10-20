@@ -1,11 +1,13 @@
 import defaultTheme from "./data/defaultTheme";
-import { ThemeProvider } from "@mui/material";
-import { AuthView } from "./components/AuthView";
+import { Box, ThemeProvider } from "@mui/material";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
-      <AuthView />
+      <Box sx={{ display: "flex", width: "100vw", height: "100vh", m: 0 }}>
+        <Outlet />
+      </Box>
     </ThemeProvider>
   );
 }
