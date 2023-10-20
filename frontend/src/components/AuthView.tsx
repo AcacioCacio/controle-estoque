@@ -1,8 +1,15 @@
 import { Box, Button, Link, TextField, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export function AuthView(): JSX.Element {
+  const navigate = useNavigate();
+
+  const navigateToHome = () => {
+    navigate("/home", { replace: true }); // TODO -> mudar para função de signUp
+  };
+
   return (
-    <Box sx={{ display: "flex", width: "100vw", height: "100vh", m: 0 }}>
+    <>
       <Box
         sx={{
           width: { xs: 400, lg: 600 },
@@ -36,7 +43,12 @@ export function AuthView(): JSX.Element {
             variant="outlined"
             sx={{ width: "100%", mb: 2 }}
           />
-          <Button variant="contained" size="large" color="primary">
+          <Button
+            variant="contained"
+            size="large"
+            color="primary"
+            onClick={navigateToHome}
+          >
             Cadastrar
           </Button>
         </Box>
@@ -45,6 +57,6 @@ export function AuthView(): JSX.Element {
         </Typography>
       </Box>
       <Box sx={{ flexGrow: 1, backgroundColor: "secondary.main" }} />
-    </Box>
+    </>
   );
 }
