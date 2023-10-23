@@ -23,4 +23,10 @@ export const estoqueMock = [
     quantidade: 40,
     createdAt: "2021-05-04T00:00:00.000Z",
   },
+  {
+    id: 5,
+    nome: "Produto 5",
+    quantidade: 50,
+    createdAt: "2021-05-05T00:00:00.000Z",
+  },
 ];
