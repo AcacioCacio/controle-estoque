@@ -1,5 +1,5 @@
 export type Estoque = {
-  id: number;
+  id: string;
   nome: string;
   quantidade: number;
   createdAt: Date | null;
