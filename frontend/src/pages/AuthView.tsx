@@ -1,5 +1,11 @@
 import { Box, Button, Link, Stack, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import {
+  FIELD_MAX_LENGTH,
+  FIELD_MIN_LENGTH,
+  REQUIRED_FIELD,
+  VALID_EMAIL,
+} from "../data/inputErrorTexts";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -10,9 +16,12 @@ function getDefaultValues() {
 
 function getFormValidationSchema(): Yup.AnyObjectSchema {
   return Yup.object({
-    name: Yup.string().required("Nome é obrigatório"),
-    email: Yup.string().required("E-mail é obrigatório"),
-    password: Yup.string().required("Senha é obrigatória"),
+    name: Yup.string().required(REQUIRED_FIELD),
+    email: Yup.string().email(VALID_EMAIL).required(REQUIRED_FIELD),
+    password: Yup.string()
+      .required(REQUIRED_FIELD)
+      .min(6, FIELD_MIN_LENGTH)
+      .max(20, FIELD_MAX_LENGTH),
   });
 }
 
@@ -44,7 +53,7 @@ export function AuthView(): JSX.Element {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "background.default",
+          backgroundColor: "background.paper",
           gap: 4,
           px: 4,
         }}
@@ -116,7 +125,7 @@ export function AuthView(): JSX.Element {
           Já tem uma conta? <Link onClick={navigateToHome}>Faça login</Link>
         </Typography>
       </Box>
-      <Box sx={{ flexGrow: 1, backgroundColor: "secondary.main" }} />
+      <Box sx={{ flexGrow: 1, backgroundColor: "primary.main" }} />
     </>
   );
 }
