@@ -5,15 +5,12 @@ export default createTheme({
     primary: {
       main: "#1876D0",
     },
-    secondary: {
-      main: "#0a504a",
-    },
     background: {
-      default: "#fff4f4",
-      paper: "#fff",
+      default: "#F5F5F5",
+      paper: "#FFF",
     },
-    error:{
-      main:"#D01818",
-    }
+    error: {
+      main: "#D01818",
+    },
   },
 });

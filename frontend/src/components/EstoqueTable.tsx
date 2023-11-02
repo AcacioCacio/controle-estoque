@@ -1,13 +1,12 @@
-import { Box, Button, IconButton, Typography } from "@mui/material";
-import { estoqueMock } from "../data/estoqueMock";
+import { Box, IconButton } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { Searchbar } from "./Searchbar";
+import { estoqueMock } from "../data/estoqueMock";
+import NewProduct from "./NewProduct";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import NewProduct from "./NewProduct";
 
-//Criar NAVBAR usando a logo => '../Images/Logo.svg'
-
-export function HomeView(): JSX.Element {
+export function EstoqueTable() {
   const handleEdit = (id: string) => {
     console.log("Edit", id); // TODO -> implementar feature
   };
@@ -16,11 +15,15 @@ export function HomeView(): JSX.Element {
     console.log("Delete", id); // TODO -> implementar feature
   };
 
+  const handleSearch = (search?: string) => {
+    // TODO -> implementar busca
+  };
+
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID", width: 90 },
-    { field: "nome", headerName: "Product", width: 150 },
-    { field: "quantidade", headerName: "Quantidade", width: 150 },
-    { field: "createdAt", headerName: "CreatedAt", width: 150 },
+    { field: "nome", headerName: "Product", minWidth: 150, flex: 1 },
+    { field: "quantidade", headerName: "Quantidade", minWidth: 150, flex: 1 },
+    { field: "createdAt", headerName: "CreatedAt", width: 200 },
     {
       field: "edit",
       headerName: "Edit",
@@ -62,37 +65,10 @@ export function HomeView(): JSX.Element {
   ];
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-      }}
-    >
+    <Box sx={{ mx: 10 }}>
       <Box
         sx={{
-          height: "84px",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          backgroundColor: "#D9D9D9",
-          paddingLeft: "15px",
-        }}
-      >
-        <Button sx={{ marginRight: "35px" }}>
-          <Typography>NAVBAR Logo aqui!!!</Typography>
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{ marginRight: "35px" }}
-        >
-          Estoque
-        </Button>
-        <Button variant="contained">Movimentação</Button>
-      </Box>
-      <Box
-        sx={{
-          justifyContent: "space-around",
+          justifyContent: "space-between",
           alignItems: "center",
           display: "flex",
           flexDirection: "row",
@@ -100,17 +76,17 @@ export function HomeView(): JSX.Element {
           marginBottom: "19px",
         }}
       >
-        <Typography sx={{ fontSize: 32, fontWeight: 500, paddingRight: 70 }}>
-          Barra de Pesquisa
-        </Typography>
+        <Searchbar
+          placeholder="Procurar por um produto"
+          onSearch={handleSearch}
+          disabled={false}
+        />
         <NewProduct />
       </Box>
       <Box
         sx={{
           justifyContent: "center",
           alignItems: "center",
-          marginLeft: "150px",
-          marginRight: "150px",
         }}
       >
         <DataGrid
