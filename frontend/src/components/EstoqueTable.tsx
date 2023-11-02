@@ -1,5 +1,6 @@
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { Searchbar } from "./Searchbar";
 import { estoqueMock } from "../data/estoqueMock";
 import NewProduct from "./NewProduct";
 import EditIcon from "@mui/icons-material/Edit";
@@ -12,6 +13,10 @@ export function EstoqueTable() {
 
   const handleDelete = (id: string) => {
     console.log("Delete", id); // TODO -> implementar feature
+  };
+
+  const handleSearch = (search?: string) => {
+    // TODO -> implementar busca
   };
 
   const columns: GridColDef[] = [
@@ -76,10 +81,11 @@ export function EstoqueTable() {
           marginBottom: "19px",
         }}
       >
-        {/*TODO -> implementar*/}
-        <Typography sx={{ fontSize: 32, fontWeight: 500, paddingRight: 70 }}>
-          Barra de Pesquisa
-        </Typography>
+        <Searchbar
+          placeholder="Procurar por um produto"
+          onSearch={handleSearch}
+          disabled={false}
+        />
         <NewProduct />
       </Box>
       <Box
