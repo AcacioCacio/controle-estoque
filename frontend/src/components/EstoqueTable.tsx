@@ -65,12 +65,7 @@ export function EstoqueTable() {
   ];
 
   return (
-    <Box
-      sx={{
-        marginLeft: "150px",
-        marginRight: "150px",
-      }}
-    >
+    <Box sx={{ mx: 10 }}>
       <Box
         sx={{
           justifyContent: "space-between",

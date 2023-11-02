@@ -1,9 +1,12 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useConfirm } from "material-ui-confirm";
 
 // Criar NAVBAR usando a logo => '../Images/Logo.svg'
 
 export function Navbar() {
+  const confirm = useConfirm();
+
   const navigate = useNavigate();
 
   const goToEstoque = () => {
@@ -14,8 +17,36 @@ export function Navbar() {
     navigate("/home/movimentacao", { replace: true });
   };
 
-  const handleLogout = () => {
-    navigate("/auth", { replace: true });
+  const handleLogout = async (): Promise<void> => {
+    try {
+      await confirm({
+        title: "Deseja sair?",
+        content: (
+          <Typography>Ao confirmar você será deslogado da aplicação</Typography>
+        ),
+        confirmationText: "Sair",
+        confirmationButtonProps: {
+          color: "error",
+          variant: "contained",
+          sx: {
+            mb: 2,
+            mr: 2,
+          },
+        },
+        cancellationText: "Cancelar",
+        cancellationButtonProps: {
+          variant: "outlined",
+          sx: {
+            mb: 2,
+            mr: 1,
+          },
+        },
+      });
+
+      navigate("/auth", { replace: true });
+    } catch (e) {
+      console.log("e", e);
+    }
   };
 
   return (
