@@ -16,8 +16,8 @@ export function EstoqueTable() {
 
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID", width: 90 },
-    { field: "nome", headerName: "Product", width: 150 },
-    { field: "quantidade", headerName: "Quantidade", width: 150 },
+    { field: "nome", headerName: "Product", minWidth: 150, flex: 1 },
+    { field: "quantidade", headerName: "Quantidade", minWidth: 150, flex: 1 },
     { field: "createdAt", headerName: "CreatedAt", width: 200 },
     {
       field: "edit",
