@@ -1,4 +1,4 @@
-import { Box, Button, Typography, IconButton } from "@mui/material";
+import { Box, Button, Typography, IconButton, Stack, AppBar, Toolbar, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useConfirm } from "material-ui-confirm";
 import LogoNavbar from '../Images/Logo.svg';
@@ -48,45 +48,47 @@ export function Navbar(): JSX.Element {
   };
 
   return (
-    <Box
-      sx={{
-        height: "80px",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        backgroundColor: "#E0FFFF",
-        px: 10,
-        span: 1,
-      }}
-    >
-      <IconButton size="large" edge="start" color="inherit" aria-label="LogoNavBar">
-        <img src={LogoNavbar} alt="Logo" style={{ width: '40px', height: '40px' }} />
-      </IconButton>
-      <Button
-        variant="contained"
-        color="primary"
-        sx={{ marginRight: "10px", marginLeft: "30px", width: '100px', height: '40px', marginTop: "2px" }}
-        onClick={goToEstoque}
-      >
-        Estoque
-      </Button>
-      <Button
-        variant="contained"
-        color="primary"
-        sx={{ marginRight: "10px", marginLeft: "20px", width: '150px', height: '40px', marginTop: "2px" }}
-        onClick={goToMovimentacao}
-      >
-        Movimentação
-      </Button>
-      <Button
-        variant="contained"
-        color="error"
-        sx={{ marginLeft: "83%", width: '80px', height: '40px', marginTop: "2px" }}
-        onClick={handleLogout}
-      >
-        Sair
-      </Button>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="LogoNavBar"
+            onClick={goToEstoque}
+          >
+            <img src={LogoNavbar} alt="Logo" style={{ width: '40px', height: '40px' }} />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Sistema de Controle
+          </Typography>
+          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            <Grid container spacing={2} alignItems="center">
+              <Grid item>
+                <Button color="inherit" onClick={goToEstoque}>
+                  Inicio
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button color="inherit" onClick={goToEstoque}>
+                  Estoque
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button color="inherit" onClick={goToMovimentacao}>
+                  Movimentações
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button color="inherit" onClick={handleLogout}>
+                  Sair
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+        </Toolbar>
+      </AppBar>
     </Box>
   );
 }
