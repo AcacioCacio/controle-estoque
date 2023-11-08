@@ -5,10 +5,10 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
-    TextField
+    Typography
 } from '@mui/material';
 
-function UpdateProduct(){
+function DeleteProduct(){
     const [ open, setOpen ] = useState(false);
 
     const handleClickOpen = () => {
@@ -26,7 +26,7 @@ function UpdateProduct(){
                 color="primary"
                 onClick={handleClickOpen}
             >
-                Alterar
+                Novo
             </Button>
             <Dialog
                 open={open}
@@ -35,24 +35,12 @@ function UpdateProduct(){
                 aria-describedby='new-screen-overlay-description'
             >
                 <DialogTitle id="new-screen-overlay-title">
-                    Alterar Produto
+                    Deletar Produto
                 </DialogTitle>
                 <DialogContent>
-                    <TextField 
-                        label="Nome do Produto"
-                        variant="outlined"
-                        sx={{width: "100%", mb: 2}}
-                    />
-                    <TextField 
-                        label="Quantidade"
-                        variant="outlined"
-                        sx={{width: "100%", mb: 2}}
-                    />
-                    <TextField 
-                        label="Data de Alteração"
-                        variant="outlined"
-                        sx={{width: "100%", mb: 2}}
-                    />          
+                    <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+                        Deseja mesmo excluir permanentemente este produto?
+                    </Typography>      
                 </DialogContent>
                 <DialogActions sx={{marginBottom: "15px", marginRight: "18px"}}>
                     <Button variant="contained" color="primary" onClick={handleClose}>
@@ -67,4 +55,4 @@ function UpdateProduct(){
     );
 }
 
-export default UpdateProduct;
+export default DeleteProduct;

@@ -4,8 +4,9 @@ import { estoqueMock } from "../data/estoqueMock";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LogoNavbar from '../Images/Logo.svg';
-import NewProduct from './NewProduct'; // Supondo a existência de um componente NewProduct
-
+import NewProduct from './NewProduct';       // Supondo a existência de um componente NewProduct
+import UpdateProduct from './UpdateProduct'; // Supondo a existência de um componente UpdateProduct
+import DeleteProduct from './DeleteProduct'; // Supondo a existência de um componente DeleteProduct
 
 export function HomeView(): JSX.Element {
   const handleEdit = (id: string) => {
@@ -36,7 +37,7 @@ export function HomeView(): JSX.Element {
           color="primary"
           size="small"
         >
-          <EditIcon />
+          <EditIcon/>
         </IconButton>
       ),
     },
@@ -55,7 +56,7 @@ export function HomeView(): JSX.Element {
           color="error"
           size="small"
         >
-          <DeleteIcon />
+          <DeleteIcon/>
         </IconButton>
       ),
     },
@@ -82,9 +83,9 @@ export function HomeView(): JSX.Element {
           </Toolbar>
         </AppBar>
 
-        <Typography sx={{ fontSize: 32, fontWeight: 500, paddingRight: 70 }}>
+        {/* <Typography sx={{ fontSize: 32, fontWeight: 500, paddingRight: 70 }}>
           Barra de Pesquisa
-        </Typography>
+        </Typography> */}
         <NewProduct />
       </div>
 

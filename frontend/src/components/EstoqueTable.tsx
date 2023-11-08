@@ -5,6 +5,8 @@ import { estoqueMock } from "../data/estoqueMock";
 import NewProduct from "./NewProduct";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import UpdateProduct from './UpdateProduct'; // Supondo a existência de um componente UpdateProduct
+import DeleteProduct from './DeleteProduct'; // Supondo a existência de um componente DeleteProduct
 
 export function EstoqueTable() {
   const handleEdit = (id: string) => {
