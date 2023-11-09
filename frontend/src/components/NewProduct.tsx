@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { 
+import {
     Button, 
     Dialog, 
     DialogActions,
     DialogContent,
     DialogTitle,
-    TextField
+    TextField,
+    Typography
 } from '@mui/material';
+import { useConfirm } from "material-ui-confirm";
+import { SnackbarProvider, useSnackbar } from 'notistack';
 
 function NewProduct(){
     const [ open, setOpen ] = useState(false);
@@ -18,6 +21,44 @@ function NewProduct(){
     const handleClose = () =>{
         setOpen(false);
     };
+
+    const {enqueueSnackbar, closeSnackbar} = useSnackbar();
+
+    const confirm = useConfirm();
+
+    const handleNew = async () => {
+        try {
+          await confirm({
+            title: "Deseja criar mesmo?",
+            content: (
+              <Typography>Ao confirmar, o produto será criado</Typography>
+            ),
+            confirmationText: "Criar",
+            confirmationButtonProps: {
+              color: "info",
+              variant: "contained",
+              sx: {
+                mb: 2,
+                mr: 2,
+              },
+            },
+            cancellationText: "Cancelar",
+            cancellationButtonProps: {
+              variant: "outlined",
+              sx: {
+                mb: 2,
+                mr: 1,
+              },
+            },
+          });
+
+          enqueueSnackbar('The product has been created!', {variant: 'success'})
+
+        } catch (e) {
+          console.log("Erro", e);
+          enqueueSnackbar('Error to create the product!', {variant: 'error'})
+        }
+      };
 
     return(
         <>
@@ -55,7 +96,7 @@ function NewProduct(){
                     />          
                 </DialogContent>
                 <DialogActions sx={{marginBottom: "15px", marginRight: "18px"}}>
-                    <Button variant="contained" color="primary" onClick={handleClose}>
+                    <Button variant="contained" color="primary" onClick={handleNew}>
                         Confirm
                     </Button>
                     <Button variant="contained" color='error' onClick={handleClose}>

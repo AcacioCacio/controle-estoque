@@ -1,17 +1,14 @@
+import React, {useState} from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Stack, Button, Box } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { estoqueMock } from "../data/estoqueMock";
-import EditIcon from "@mui/icons-material/Edit";
+
 import DeleteIcon from "@mui/icons-material/Delete";
 import LogoNavbar from '../Images/Logo.svg';
 import NewProduct from './NewProduct';       // Supondo a existência de um componente NewProduct
-import UpdateProduct from './UpdateProduct'; // Supondo a existência de um componente UpdateProduct
-import DeleteProduct from './DeleteProduct'; // Supondo a existência de um componente DeleteProduct
+import UpdateProduct from './UpdateProduct';
 
 export function HomeView(): JSX.Element {
-  const handleEdit = (id: string) => {
-    console.log("Edit", id); // TODO -> implementar feature
-  };
 
   const handleDelete = (id: string) => {
     console.log("Delete", id); // TODO -> implementar feature
@@ -31,14 +28,9 @@ export function HomeView(): JSX.Element {
       disableExport: true,
       width: 80,
       renderCell: ({ row }) => (
-        <IconButton
-          onClick={() => handleEdit(row.id)}
-          aria-label="edit"
-          color="primary"
-          size="small"
-        >
-          <EditIcon/>
-        </IconButton>
+        <>
+          <UpdateProduct />
+        </>
       ),
     },
     {
