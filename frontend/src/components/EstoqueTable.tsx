@@ -1,19 +1,13 @@
-import { Box, IconButton } from "@mui/material";
+import React, {useState} from 'react';
+import { Box } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Searchbar } from "./Searchbar";
 import { estoqueMock } from "../data/estoqueMock";
 import NewProduct from "./NewProduct";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import UpdateProduct from './UpdateProduct';
+import DeleteProduct from './DeleteProduct';
 
 export function EstoqueTable() {
-  const handleEdit = (id: string) => {
-    console.log("Edit", id); // TODO -> implementar feature
-  };
-
-  const handleDelete = (id: string) => {
-    console.log("Delete", id); // TODO -> implementar feature
-  };
 
   const handleSearch = (search?: string) => {
     // TODO -> implementar busca
@@ -32,15 +26,8 @@ export function EstoqueTable() {
       disableColumnMenu: true,
       disableExport: true,
       width: 80,
-      renderCell: ({ row }) => (
-        <IconButton
-          onClick={() => handleEdit(row.id)}
-          aria-label="edit"
-          color="primary"
-          size="small"
-        >
-          <EditIcon />
-        </IconButton>
+      renderCell: () => (
+        <UpdateProduct />
       ),
     },
     {
@@ -51,15 +38,8 @@ export function EstoqueTable() {
       disableColumnMenu: true,
       disableExport: true,
       width: 80,
-      renderCell: ({ row }) => (
-        <IconButton
-          onClick={() => handleDelete(row.id)}
-          aria-label="edit"
-          color="error"
-          size="small"
-        >
-          <DeleteIcon />
-        </IconButton>
+      renderCell: () => (
+        <DeleteProduct/>
       ),
     },
   ];

@@ -19,7 +19,7 @@ export class ProductsController {
   async create(@Body() createProductDto: CreateProductDto) {
     try {
       const result = await this.productsService.create(createProductDto);
-      return { message: 'Produto adicionado com sucesso!', Produto: result };
+      return { message: 'Produto adicionado com sucesso!', produto: result };
     } catch (error) {
       return { error: error.message, errorCode: error.code };
     }

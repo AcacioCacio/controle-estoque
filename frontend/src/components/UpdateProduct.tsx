@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { 
     Button, 
     Dialog, 
     DialogActions,
     DialogContent,
     DialogTitle,
-    TextField
+    TextField,
+    IconButton,
+    Typography
 } from '@mui/material';
+import EditIcon from "@mui/icons-material/Edit";
+import { useConfirm } from "material-ui-confirm";
+import { SnackbarProvider, useSnackbar } from 'notistack';
 
-function UpdateProduct(){
+function UpdateProduct(): JSX.Element{
     const [ open, setOpen ] = useState(false);
 
     const handleClickOpen = () => {
@@ -19,50 +24,90 @@ function UpdateProduct(){
         setOpen(false);
     };
 
+    const {enqueueSnackbar, closeSnackbar} = useSnackbar();
+
+    const confirm = useConfirm();
+
+    const handleUpdate = async () => {
+        try {
+          await confirm({
+            title: "Deseja alterar mesmo?",
+            content: (
+              <Typography>Ao confirmar, o produto será excluído</Typography>
+            ),
+            confirmationText: "Alterar",
+            confirmationButtonProps: {
+              color: "info",
+              variant: "contained",
+              sx: {
+                mb: 2,
+                mr: 2,
+              },
+            },
+            cancellationText: "Cancelar",
+            cancellationButtonProps: {
+              variant: "outlined",
+              sx: {
+                mb: 2,
+                mr: 1,
+              },
+            },
+          });
+
+          enqueueSnackbar('The product has been updated!', {variant: 'success'})
+
+        } catch (e) {
+          console.log("Erro", e);
+          enqueueSnackbar('Error to update the product!', {variant: 'error'})
+        }
+      };
+
     return(
         <>
-            <Button 
-                variant="contained" 
-                color="primary"
-                onClick={handleClickOpen}
+            <IconButton
+            onClick={handleClickOpen}
+            aria-label="edit"
+            color="primary"
+            size="small"
             >
-                Novo
-            </Button>
+                <EditIcon/>
+            </IconButton>
+            
             <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby='new-screen-overlay-title'
-                aria-describedby='new-screen-overlay-description'
-            >
-                <DialogTitle id="new-screen-overlay-title">
-                    Alterar Produto
-                </DialogTitle>
-                <DialogContent>
-                    <TextField 
-                        label="Nome do Produto"
-                        variant="outlined"
-                        sx={{width: "100%", mb: 2}}
-                    />
-                    <TextField 
-                        label="Quantidade"
-                        variant="outlined"
-                        sx={{width: "100%", mb: 2}}
-                    />
-                    <TextField 
-                        label="Data de Alteração"
-                        variant="outlined"
-                        sx={{width: "100%", mb: 2}}
-                    />          
-                </DialogContent>
-                <DialogActions sx={{marginBottom: "15px", marginRight: "18px"}}>
-                    <Button variant="contained" color="primary" onClick={handleClose}>
-                        Confirmar
-                    </Button>
-                    <Button variant="contained" color='error' onClick={handleClose}>
-                        Close
-                    </Button>
-                </DialogActions>
-            </Dialog>
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby='new-screen-overlay-title'
+                    aria-describedby='new-screen-overlay-description'
+                >
+                    <DialogTitle id="new-screen-overlay-title">
+                        Alterar Produto
+                    </DialogTitle>
+                    <DialogContent>
+                        <TextField 
+                            label="Nome do Produto"
+                            variant="outlined"
+                            sx={{width: "100%", mb: 2}}
+                        />
+                        <TextField 
+                            label="Quantidade"
+                            variant="outlined"
+                            sx={{width: "100%", mb: 2}}
+                        />
+                        <TextField 
+                            label="Data de Alteração"
+                            variant="outlined"
+                            sx={{width: "100%", mb: 2}}
+                        />          
+                    </DialogContent>
+                    <DialogActions sx={{marginBottom: "15px", marginRight: "18px"}}>
+                        <Button variant="contained" color="primary" onClick={handleUpdate}>
+                            Confirmar
+                        </Button>
+                        <Button variant="contained" color='error' onClick={handleClose}>
+                            Close
+                        </Button>
+                    </DialogActions>
+                </Dialog>
         </>
     );
 }

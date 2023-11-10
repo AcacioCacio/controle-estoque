@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import {
+import { useState } from 'react';
+import { 
     Button, 
     Dialog, 
     DialogActions,
     DialogContent,
     DialogTitle,
-    TextField,
-    Typography
+    Typography,
+    IconButton
 } from '@mui/material';
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useConfirm } from "material-ui-confirm";
-import { SnackbarProvider, useSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 
-function NewProduct(){
+function DeleteProduct(){
     const [ open, setOpen ] = useState(false);
 
     const handleClickOpen = () => {
@@ -26,16 +27,16 @@ function NewProduct(){
 
     const confirm = useConfirm();
 
-    const handleNew = async () => {
+    const handleDelete = async () => {
         try {
           await confirm({
-            title: "Deseja criar mesmo?",
+            title: "Deseja excluir mesmo?",
             content: (
-              <Typography>Ao confirmar, o produto será criado</Typography>
+              <Typography>Ao confirmar, o produto será excluído</Typography>
             ),
-            confirmationText: "Criar",
+            confirmationText: "Excluir",
             confirmationButtonProps: {
-              color: "info",
+              color: "error",
               variant: "contained",
               sx: {
                 mb: 2,
@@ -52,23 +53,24 @@ function NewProduct(){
             },
           });
 
-          enqueueSnackbar('The product has been created!', {variant: 'success'})
+          enqueueSnackbar('The product has been deleted!', {variant: 'success'})
 
         } catch (e) {
           console.log("Erro", e);
-          enqueueSnackbar('Error to create the product!', {variant: 'error'})
+          enqueueSnackbar('Error to delete the product!', {variant: 'error'})
         }
       };
 
     return(
         <>
-            <Button 
-                variant="contained" 
-                color="primary"
-                onClick={handleClickOpen}
+            <IconButton
+            onClick={handleClickOpen}
+            aria-label="delete"
+            color="error"
+            size="small"
             >
-                Novo
-            </Button>
+                <DeleteIcon />
+            </IconButton>
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -76,28 +78,16 @@ function NewProduct(){
                 aria-describedby='new-screen-overlay-description'
             >
                 <DialogTitle id="new-screen-overlay-title">
-                    Novo Produto
+                    Deletar Produto
                 </DialogTitle>
                 <DialogContent>
-                    <TextField 
-                        label="Nome do Produto"
-                        variant="outlined"
-                        sx={{width: "100%", mb: 2}}
-                    />
-                    <TextField 
-                        label="Quantidade"
-                        variant="outlined"
-                        sx={{width: "100%", mb: 2}}
-                    />
-                    <TextField 
-                        label="Data de Criação"
-                        variant="outlined"
-                        sx={{width: "100%", mb: 2}}
-                    />          
+                    <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+                        Deseja mesmo excluir permanentemente este produto?
+                    </Typography>      
                 </DialogContent>
                 <DialogActions sx={{marginBottom: "15px", marginRight: "18px"}}>
-                    <Button variant="contained" color="primary" onClick={handleNew}>
-                        Confirm
+                    <Button variant="contained" color="primary" onClick={handleDelete}>
+                        Confirmar
                     </Button>
                     <Button variant="contained" color='error' onClick={handleClose}>
                         Close
@@ -108,4 +98,4 @@ function NewProduct(){
     );
 }
 
-export default NewProduct;
+export default DeleteProduct;
