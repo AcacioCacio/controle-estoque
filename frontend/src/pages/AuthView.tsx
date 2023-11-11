@@ -8,6 +8,10 @@ import {
 } from "../data/inputErrorTexts";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { UserFormData } from "../types/UserFormData";
+import { useState } from "react";
+import useCreateUser from "../hooks/useCreateUser";
+import LinearProgress from "@mui/material/LinearProgress";
 import * as Yup from "yup";
 
 function getDefaultValues() {
@@ -27,6 +31,9 @@ function getFormValidationSchema(): Yup.AnyObjectSchema {
 
 export function AuthView(): JSX.Element {
   const navigate = useNavigate();
+  const createUser = useCreateUser();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const defaultValues = getDefaultValues();
   const validationSchema = getFormValidationSchema();
@@ -36,8 +43,8 @@ export function AuthView(): JSX.Element {
     resolver: yupResolver(validationSchema),
   });
 
-  const onCreateAccount = (formData: any) => {
-    console.log("create", formData);
+  const onCreateAccount = (formData: UserFormData) => {
+    createUser(formData, setIsLoading);
   };
 
   const navigateToHome = () => {
@@ -51,23 +58,32 @@ export function AuthView(): JSX.Element {
           width: { xs: 400, lg: 600 },
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
+          justifyContent: "space-between",
           alignItems: "center",
           backgroundColor: "background.paper",
           gap: 4,
-          px: 4,
         }}
       >
-        <Typography sx={{ fontSize: 32, fontWeight: 500 }}>
-          Criar uma conta
-        </Typography>
+        <Box sx={{ width: "100%" }}>{isLoading && <LinearProgress />}</Box>
+
         <Stack
-          sx={{ display: "flex", flexDirection: "column", width: "100%" }}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            width: "90%",
+            gap: 2,
+            px: 2,
+          }}
           component="form"
           onSubmit={methods.handleSubmit(onCreateAccount)}
           noValidate
           autoComplete="off"
         >
+          <Typography
+            sx={{ fontSize: 32, fontWeight: 500, textAlign: "center" }}
+          >
+            Criar uma conta
+          </Typography>
           <Controller
             name="name"
             control={methods.control}
@@ -75,10 +91,11 @@ export function AuthView(): JSX.Element {
               <TextField
                 label="Nome"
                 variant="outlined"
-                sx={{ width: "100%", mb: 2 }}
+                sx={{ width: "100%" }}
                 {...field}
                 error={fieldState.invalid}
                 helperText={fieldState.error && fieldState.error.message}
+                disabled={isLoading}
               />
             )}
           />
@@ -90,10 +107,11 @@ export function AuthView(): JSX.Element {
                 label="E-mail"
                 type="email"
                 variant="outlined"
-                sx={{ width: "100%", mb: 2 }}
+                sx={{ width: "100%" }}
                 {...field}
                 error={fieldState.invalid}
                 helperText={fieldState.error && fieldState.error.message}
+                disabled={isLoading}
               />
             )}
           />
@@ -105,10 +123,11 @@ export function AuthView(): JSX.Element {
                 label="Senha"
                 type="password"
                 variant="outlined"
-                sx={{ width: "100%", mb: 2 }}
+                sx={{ width: "100%" }}
                 {...field}
                 error={fieldState.invalid}
                 helperText={fieldState.error && fieldState.error.message}
+                disabled={isLoading}
               />
             )}
           />
@@ -117,13 +136,16 @@ export function AuthView(): JSX.Element {
             size="large"
             color="primary"
             type="submit"
+            disabled={isLoading}
           >
             Cadastrar
           </Button>
+          <Typography sx={{ textAlign: "center", mt: 1 }}>
+            Já tem uma conta? <Link onClick={navigateToHome}>Faça login</Link>
+          </Typography>
         </Stack>
-        <Typography>
-          Já tem uma conta? <Link onClick={navigateToHome}>Faça login</Link>
-        </Typography>
+
+        <Box />
       </Box>
       <Box sx={{ flexGrow: 1, backgroundColor: "primary.main" }} />
     </>

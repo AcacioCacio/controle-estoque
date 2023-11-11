@@ -1,7 +1,15 @@
-import { Box, Button, Typography, IconButton, Stack, AppBar, Toolbar, Grid } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useConfirm } from "material-ui-confirm";
-import LogoNavbar from '../Images/Logo.svg';
+import LogoNavbar from "../Images/Logo.svg";
 
 export function Navbar(): JSX.Element {
   const confirm = useConfirm();
@@ -20,7 +28,9 @@ export function Navbar(): JSX.Element {
       await confirm({
         title: "Deseja sair?",
         content: (
-          <Typography>Ao confirmar, você será deslogado da aplicação</Typography>
+          <Typography>
+            Ao confirmar, você será deslogado da aplicação
+          </Typography>
         ),
         confirmationText: "Sair",
         confirmationButtonProps: {
@@ -58,18 +68,17 @@ export function Navbar(): JSX.Element {
             aria-label="LogoNavBar"
             onClick={goToEstoque}
           >
-            <img src={LogoNavbar} alt="Logo" style={{ width: '40px', height: '40px' }} />
+            <img
+              src={LogoNavbar}
+              alt="Logo"
+              style={{ width: "40px", height: "40px" }}
+            />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Sistema de Controle
           </Typography>
-          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+          <Box sx={{ display: { xs: "none", md: "block" } }}>
             <Grid container spacing={2} alignItems="center">
-              <Grid item>
-                <Button color="inherit" onClick={goToEstoque}>
-                  Inicio
-                </Button>
-              </Grid>
               <Grid item>
                 <Button color="inherit" onClick={goToEstoque}>
                   Estoque
