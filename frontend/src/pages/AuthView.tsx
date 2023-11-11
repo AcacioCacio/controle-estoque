@@ -8,7 +8,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 export function AuthView(): JSX.Element {
   const [isLoading, setIsLoading] = useState(false);
   const [isCreateSection, setIsCreateSection] = useState(true);
-  const [isSuccessSection, setIsSuccessSection] = useState(true);
+  const [isSuccessSection, setIsSuccessSection] = useState(false);
 
   const goToLoginSection = () => {
     setIsCreateSection(false);
