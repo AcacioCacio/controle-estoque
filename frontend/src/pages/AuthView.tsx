@@ -1,19 +1,37 @@
 import { Box } from "@mui/material";
 import { useState } from "react";
-import { AuthFormSection } from "../components/AuthFormSection";
+import { CreateUserFormSection } from "../components/CreateUserFormSection";
 import { LoginFormSection } from "../components/LoginFormSection";
+import { CreateUserSucessSection } from "../components/CreateUserSucessSection";
 import LinearProgress from "@mui/material/LinearProgress";
 
 export function AuthView(): JSX.Element {
   const [isLoading, setIsLoading] = useState(false);
-  const [isAuthSection, setIsAuthSection] = useState(true);
+  const [isCreateSection, setIsCreateSection] = useState(true);
+  const [isSuccessSection, setIsSuccessSection] = useState(true);
 
   const goToLoginSection = () => {
-    setIsAuthSection(false);
+    setIsCreateSection(false);
+    setIsSuccessSection(false);
   };
 
-  const goToAuthSection = () => {
-    setIsAuthSection(true);
+  const goToCreateSection = () => {
+    setIsCreateSection(true);
+  };
+
+  const renderCreateSection = () => {
+    if (isSuccessSection) {
+      return <CreateUserSucessSection goToLoginSection={goToLoginSection} />;
+    }
+
+    return (
+      <CreateUserFormSection
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+        setIsSuccessSection={setIsSuccessSection}
+        goToLoginSection={goToLoginSection}
+      />
+    );
   };
 
   return (
@@ -31,17 +49,13 @@ export function AuthView(): JSX.Element {
       >
         <Box sx={{ width: "100%" }}>{isLoading && <LinearProgress />}</Box>
 
-        {isAuthSection ? (
-          <AuthFormSection
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            goToLoginSection={goToLoginSection}
-          />
+        {isCreateSection ? (
+          renderCreateSection()
         ) : (
           <LoginFormSection
             isLoading={isLoading}
             setIsLoading={setIsLoading}
-            goToAuthSection={goToAuthSection}
+            goToCreateSection={goToCreateSection}
           />
         )}
 

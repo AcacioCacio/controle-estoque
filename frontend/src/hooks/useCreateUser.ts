@@ -5,6 +5,7 @@ import userApi from "../services/userApi";
 type HookReturn = (
   userFormData: UserFormData,
   setIsLoading: (value: boolean) => void,
+  setIsSuccessSection: (value: boolean) => void,
 ) => void;
 
 const useCreateUser = (): HookReturn => {
@@ -13,6 +14,7 @@ const useCreateUser = (): HookReturn => {
   return async (
     userFormData: UserFormData,
     setIsLoading: (value: boolean) => void,
+    setIsSuccessSection: (value: boolean) => void,
   ): Promise<void> => {
     try {
       setIsLoading(true);
@@ -24,6 +26,8 @@ const useCreateUser = (): HookReturn => {
       };
 
       await userApi.create(formattedFormData);
+
+      setIsSuccessSection(true);
 
       enqueueSnackbar("Usuário criado com sucesso", {
         variant: "success",

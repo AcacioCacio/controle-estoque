@@ -28,13 +28,13 @@ function getFormValidationSchema(): Yup.AnyObjectSchema {
 type Props = {
   isLoading: boolean;
   setIsLoading: (value: boolean) => void;
-  goToAuthSection: () => void;
+  goToCreateSection: () => void;
 };
 
 export function LoginFormSection({
   isLoading,
   setIsLoading,
-  goToAuthSection,
+  goToCreateSection,
 }: Props) {
   const navigate = useNavigate(); // TODO -> temporário até a implementação do login
 
@@ -130,7 +130,7 @@ export function LoginFormSection({
         variant="outlined"
         size="large"
         color="primary"
-        onClick={goToAuthSection}
+        onClick={goToCreateSection}
       >
         Voltar
       </Button>

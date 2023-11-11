@@ -29,12 +29,14 @@ function getFormValidationSchema(): Yup.AnyObjectSchema {
 type Props = {
   isLoading: boolean;
   setIsLoading: (value: boolean) => void;
+  setIsSuccessSection: (value: boolean) => void;
   goToLoginSection: () => void;
 };
 
-export function AuthFormSection({
+export function CreateUserFormSection({
   isLoading,
   setIsLoading,
+  setIsSuccessSection,
   goToLoginSection,
 }: Props) {
   const createUser = useCreateUser();
@@ -48,7 +50,7 @@ export function AuthFormSection({
   });
 
   const onCreateAccount = (formData: UserFormData) => {
-    createUser(formData, setIsLoading);
+    createUser(formData, setIsLoading, setIsSuccessSection);
   };
 
   return (
