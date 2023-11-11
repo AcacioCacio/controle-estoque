@@ -21,6 +21,7 @@
     "@types/react": "^18.2.22",
     "@types/react-dom": "^18.2.7",
     "@types/react-router-dom": "^5.3.3",
+    "axios": "^1.6.1",
     "dayjs": "^1.11.10",
     "material-ui-confirm": "^3.0.7",
     "notistack": "^3.0.1",
