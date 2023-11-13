@@ -16,7 +16,7 @@ export class MovementService {
     const product = await prodRef.get();
     const DateMillis = dayjs(date).valueOf();
 
-    if (type.toLowerCase() == 'doação') {
+    if (type.toLowerCase() == 'doacao') {
       await prodRef.update({
         quant: product.data().quant + quant,
       });
