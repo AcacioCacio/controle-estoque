@@ -1,14 +1,13 @@
-import React, {useState} from 'react';
+import React from "react";
 import { Box } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Searchbar } from "./Searchbar";
 import { estoqueMock } from "../data/estoqueMock";
 import NewProduct from "./NewProduct";
-import UpdateProduct from './UpdateProduct';
-import DeleteProduct from './DeleteProduct';
+import UpdateProduct from "./UpdateProduct";
+import DeleteProduct from "./DeleteProduct";
 
 export function EstoqueTable() {
-
   const handleSearch = (search?: string) => {
     // TODO -> implementar busca
   };
@@ -26,9 +25,7 @@ export function EstoqueTable() {
       disableColumnMenu: true,
       disableExport: true,
       width: 80,
-      renderCell: () => (
-        <UpdateProduct />
-      ),
+      renderCell: () => <UpdateProduct />,
     },
     {
       field: "delete",
@@ -38,9 +35,7 @@ export function EstoqueTable() {
       disableColumnMenu: true,
       disableExport: true,
       width: 80,
-      renderCell: () => (
-        <DeleteProduct/>
-      ),
+      renderCell: () => <DeleteProduct />,
     },
   ];
 
