@@ -24,7 +24,7 @@ export class MovementController {
         movimentação: result,
       };
     } catch (error) {
-      return { error: error.message, errorCode: error.code };
+      return { error: error.message };
     }
   }
 

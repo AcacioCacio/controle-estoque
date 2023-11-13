@@ -16,6 +16,24 @@ export class MovementService {
     const product = await prodRef.get();
     const DateMillis = dayjs(date).valueOf();
 
+    if (type.toLowerCase() == 'doação') {
+      await prodRef.update({
+        quant: product.data().quant + quant,
+      });
+    } else if (type.toLowerCase() == 'compra') {
+      await prodRef.update({
+        quant: product.data().quant + quant,
+      });
+    } else {
+      if (product.data().quant < quant) {
+        throw new Error('O estoque não pode ser negativo!');
+      } else {
+        await prodRef.update({
+          quant: product.data().quant - quant,
+        });
+      }
+    }
+
     const docRef = await this.firestore.collection('movement').add({
       idProduct,
       nameProduct: product.data().name,
