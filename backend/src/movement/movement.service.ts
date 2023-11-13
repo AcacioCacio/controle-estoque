@@ -11,12 +11,16 @@ export class MovementService {
   ) {}
 
   async create(createMovementDto: CreateMovementDto) {
-    const { idProduct, type, date } = createMovementDto;
+    const { idProduct, type, quant, date } = createMovementDto;
+    const prodRef = this.firestore.collection('products').doc(idProduct);
+    const product = await prodRef.get();
     const DateMillis = dayjs(date).valueOf();
 
     const docRef = await this.firestore.collection('movement').add({
       idProduct,
+      nameProduct: product.data().name,
       type,
+      quant,
       date: DateMillis,
     });
 
