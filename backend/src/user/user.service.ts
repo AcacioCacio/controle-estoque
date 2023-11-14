@@ -26,10 +26,11 @@ export class UserService {
     return users;
   }
 
-  async findByEmail(email: string) {
+  async findEmail(email: string) {
     const docRef = this.firestore.collection('users');
     const queryUsers = await docRef.where('email', '==', email).get();
     if (queryUsers.empty) {
+      console.log('User not found with email:', email);
       throw new UnauthorizedError(
         'Email address or password provided is incorrect.',
       );
@@ -38,9 +39,5 @@ export class UserService {
     const user = queryUsers.docs[0].data();
 
     return user;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
   }
 }

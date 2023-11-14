@@ -27,15 +27,10 @@ export class UserController {
   @Get('email')
   async findByEmail(@Query('email') email: string) {
     try {
-      const result = await this.userService.findByEmail(email);
+      const result = await this.userService.findEmail(email);
       return { message: result };
     } catch (error) {
       return { error: error.message };
     }
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
   }
 }
