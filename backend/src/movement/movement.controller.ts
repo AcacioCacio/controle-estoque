@@ -10,11 +10,13 @@ import {
 import { MovementService } from './movement.service';
 import { CreateMovementDto } from './dto/create-movement.dto';
 import { UpdateMovementDto } from './dto/update-movement.dto';
+import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 
 @Controller('movement')
 export class MovementController {
   constructor(private readonly movementService: MovementService) {}
 
+  @IsPublic()
   @Post()
   async create(@Body() createMovementDto: CreateMovementDto) {
     try {
@@ -28,6 +30,7 @@ export class MovementController {
     }
   }
 
+  @IsPublic()
   @Get()
   async findAll() {
     try {
@@ -38,6 +41,7 @@ export class MovementController {
     }
   }
 
+  @IsPublic()
   @Get(':id')
   async findOne(@Param('id') id: string) {
     try {
@@ -48,6 +52,7 @@ export class MovementController {
     }
   }
 
+  @IsPublic()
   @Get('/product/:id')
   async findPerIdProduct(@Param('id') id: string) {
     try {
@@ -58,6 +63,7 @@ export class MovementController {
     }
   }
 
+  @IsPublic()
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -71,6 +77,7 @@ export class MovementController {
     }
   }
 
+  @IsPublic()
   @Delete(':id')
   async remove(@Param('id') id: string) {
     try {
