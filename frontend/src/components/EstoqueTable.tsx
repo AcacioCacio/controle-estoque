@@ -12,11 +12,13 @@ export function EstoqueTable() {
     // TODO -> implementar busca
   };
 
+  const meuTexto = 'Estoque';
+
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID", width: 90 },
     { field: "name", headerName: "Product", minWidth: 150, flex: 1 },
     { field: "quant", headerName: "Quantidade", minWidth: 150, flex: 1 },
-    { field: "date", headerName: "CreatedAt", width: 200 },
+    { field: "date", headerName: "CreatedAt", width: 600 },
     {
       field: "edit",
       headerName: "Edit",
@@ -46,8 +48,22 @@ export function EstoqueTable() {
           justifyContent: "space-between",
           alignItems: "center",
           display: "flex",
+          flexDirection: "row",  
+          marginTop: "30px",
+          fontSize: "30px",
+        }}
+      >
+        <div>
+          <p>{meuTexto}</p>
+        </div>
+      </Box>
+      <Box
+        sx={{
+          justifyContent: "space-between",
+          alignItems: "center",
+          display: "flex",
           flexDirection: "row",
-          marginTop: "76px",
+          marginTop: "5px",
           marginBottom: "19px",
         }}
       >
