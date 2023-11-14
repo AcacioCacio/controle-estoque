@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Param, Delete, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Param,
+  Delete,
+  Body,
+  Query,
+} from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { CreateUserDto } from '../user/dto/create-user.dto';
 
@@ -16,14 +24,14 @@ export class UserController {
     }
   }
 
-  @Get()
-  findAll() {
-    return this.userService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+  @Get('email')
+  async findByEmail(@Query('email') email: string) {
+    try {
+      const result = await this.userService.findByEmail(email);
+      return { message: result };
+    } catch (error) {
+      return { error: error.message };
+    }
   }
 
   @Delete(':id')

@@ -1,7 +1,9 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { Firestore, Timestamp } from '@google-cloud/firestore';
+import { Firestore } from '@google-cloud/firestore';
 import { CreateUserDto } from './dto/create-user.dto';
+import * as bcrypt from 'bcrypt';
 import * as dayjs from 'dayjs';
+import { UnauthorizedError } from 'src/auth/err/unauthorized.error';
 
 @Injectable()
 export class UserService {
@@ -15,7 +17,7 @@ export class UserService {
 
     const docRef = await this.firestore.collection('users').add({
       email,
-      password,
+      password: await bcrypt.hash(password, 10),
       name,
       dueDate: dueDateMillis,
     });
@@ -24,12 +26,18 @@ export class UserService {
     return users;
   }
 
-  findAll() {
-    return `This action returns all user`;
-  }
+  async findByEmail(email: string) {
+    const docRef = this.firestore.collection('users');
+    const queryUsers = await docRef.where('email', '==', email).get();
+    if (queryUsers.empty) {
+      throw new UnauthorizedError(
+        'Email address or password provided is incorrect.',
+      );
+    }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+    const user = queryUsers.docs[0].data();
+
+    return user;
   }
 
   remove(id: number) {

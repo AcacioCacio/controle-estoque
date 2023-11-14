@@ -7,5 +7,6 @@ import { FirestoreModule } from 'src/firestore/firestore.module';
   imports: [FirestoreModule],
   controllers: [UserController],
   providers: [UserService],
+  exports: [UserService],
 })
 export class UserModule {}
