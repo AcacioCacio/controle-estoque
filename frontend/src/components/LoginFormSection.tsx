@@ -8,7 +8,6 @@ import {
   REQUIRED_FIELD,
   VALID_EMAIL,
 } from "../data/inputErrorTexts";
-import { useNavigate } from "react-router-dom";
 import { AuthFormData } from "../types/AuthFormData";
 import useDoLogin from "../hooks/useDoLogin";
 
@@ -38,7 +37,6 @@ export function LoginFormSection({
   goToCreateSection,
 }: Props) {
   const doLogin = useDoLogin();
-  const navigate = useNavigate(); // TODO -> temporário até a implementação do login
 
   const defaultValues = getDefaultValues();
   const validationSchema = getFormValidationSchema();
@@ -50,11 +48,6 @@ export function LoginFormSection({
 
   const onLogin = (formData: AuthFormData) => {
     doLogin(formData, setIsLoading);
-  };
-
-  // TODO -> temporário até a implementação do login
-  const navigateToHome = () => {
-    navigate("/home", { replace: true });
   };
 
   return (
@@ -116,18 +109,6 @@ export function LoginFormSection({
       >
         Login
       </Button>
-
-      {/*TODO -> temporário até a implementação do login*/}
-      <Button
-        variant="contained"
-        size="large"
-        color="success"
-        disabled={isLoading}
-        onClick={navigateToHome}
-      >
-        Entrar na aplicação (paleativo)
-      </Button>
-
       <Button
         variant="outlined"
         size="large"
