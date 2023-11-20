@@ -10,6 +10,7 @@ import {
 } from "../data/inputErrorTexts";
 import { useNavigate } from "react-router-dom";
 import { AuthFormData } from "../types/AuthFormData";
+import useDoLogin from "../hooks/useDoLogin";
 
 function getDefaultValues() {
   return { email: "", password: "" };
@@ -36,6 +37,7 @@ export function LoginFormSection({
   setIsLoading,
   goToCreateSection,
 }: Props) {
+  const doLogin = useDoLogin();
   const navigate = useNavigate(); // TODO -> temporário até a implementação do login
 
   const defaultValues = getDefaultValues();
@@ -47,8 +49,7 @@ export function LoginFormSection({
   });
 
   const onLogin = (formData: AuthFormData) => {
-    console.log("formData", formData);
-    console.log("setIsLoading", setIsLoading);
+    doLogin(formData, setIsLoading);
   };
 
   // TODO -> temporário até a implementação do login
@@ -106,16 +107,17 @@ export function LoginFormSection({
         )}
       />
 
+      <Button
+        variant="contained"
+        size="large"
+        color="primary"
+        type="submit"
+        disabled={isLoading}
+      >
+        Login
+      </Button>
+
       {/*TODO -> temporário até a implementação do login*/}
-      {/*<Button*/}
-      {/*  variant="contained"*/}
-      {/*  size="large"*/}
-      {/*  color="primary"*/}
-      {/*  type="submit"*/}
-      {/*  disabled={isLoading}*/}
-      {/*>*/}
-      {/*  Cadastrar*/}
-      {/*</Button>*/}
       <Button
         variant="contained"
         size="large"
