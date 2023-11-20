@@ -10,8 +10,11 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useConfirm } from "material-ui-confirm";
 import LogoNavbar from "../Images/Logo.svg";
+import useDoLogout from "../hooks/useDoLogout";
 
 export function Navbar(): JSX.Element {
+  const doLogout = useDoLogout();
+
   const confirm = useConfirm();
   const navigate = useNavigate();
 
@@ -51,10 +54,8 @@ export function Navbar(): JSX.Element {
         },
       });
 
-      navigate("/auth", { replace: true });
-    } catch (e) {
-      console.log("Erro", e);
-    }
+      doLogout();
+    } catch (e) {}
   };
 
   return (
