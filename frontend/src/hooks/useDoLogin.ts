@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthContext";
 import { AuthFormData } from "../types/AuthFormData";
 import { useSnackbar } from "notistack";
-import { useContext } from "react";
 import userApi from "../services/userApi";
 
 type HookReturn = (
@@ -13,7 +11,6 @@ type HookReturn = (
 const useDoLogin = (): HookReturn => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-  const { setAuthToken } = useContext(AuthContext);
 
   return async (
     authFormData: AuthFormData,
@@ -24,7 +21,7 @@ const useDoLogin = (): HookReturn => {
 
       const response = await userApi.auth(authFormData);
 
-      setAuthToken(response.acess_token);
+      sessionStorage.setItem("token", response.acess_token);
 
       navigate("/home", { replace: true });
     } catch (error) {

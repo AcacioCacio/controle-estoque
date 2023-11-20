@@ -1,15 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../contexts/AuthContext";
 
 type HookReturn = () => void;
 
 const useDoLogout = (): HookReturn => {
   const navigate = useNavigate();
-  const { setAuthToken } = useContext(AuthContext);
 
   return (): void => {
-    setAuthToken(null);
+    sessionStorage.removeItem("token");
 
     navigate("/auth", { replace: true });
   };
