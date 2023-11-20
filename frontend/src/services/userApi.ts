@@ -1,12 +1,16 @@
 import { UserFormData } from "../types/UserFormData";
-import axios from "axios";
+import { AuthFormData } from "../types/AuthFormData";
+import { UserToken } from "../types/UserToken";
+import httpClient from "../lib/httpClient";
 
 export type FirebaseReturn =
   | { message: string; error?: undefined }
   | { error: any; message?: undefined };
 
 async function create(userFormData: UserFormData): Promise<FirebaseReturn> {
-  const response = await axios.post<FirebaseReturn>(
+  const client = httpClient();
+
+  const response = await client.post<FirebaseReturn>(
     `${process.env.REACT_APP_API_URL}/user`,
     userFormData,
   );
@@ -14,8 +18,20 @@ async function create(userFormData: UserFormData): Promise<FirebaseReturn> {
   return response.data;
 }
 
+async function auth(authFormData: AuthFormData): Promise<UserToken> {
+  const client = httpClient();
+
+  const response = await client.post<UserToken>(
+    `${process.env.REACT_APP_API_URL}/login`,
+    authFormData,
+  );
+
+  return response.data;
+}
+
 const userApi = {
   create,
+  auth,
 };
 
 export default userApi;
