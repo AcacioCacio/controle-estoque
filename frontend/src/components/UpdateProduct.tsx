@@ -58,7 +58,6 @@ function UpdateProduct(): JSX.Element{
 
         } catch (e) {
           console.log("Erro", e);
-          enqueueSnackbar('Error to update the product!', {variant: 'error'})
         }
       };
 

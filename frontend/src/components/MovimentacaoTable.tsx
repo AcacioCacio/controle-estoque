@@ -1,17 +1,57 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Searchbar } from "./Searchbar";
 import NewProduct from "./NewProduct";
 import UpdateProduct from "./UpdateProduct";
-import DeleteProduct from "./DeleteProduct";
 import { movimentacaoMock } from "../data/movimentacaoMock";
+import { useConfirm } from "material-ui-confirm";
+import { useSnackbar } from 'notistack';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const meuTexto = 'Movimentação';
 
 export function MovimentacaoTable() {
   const handleSearch = (search?: string) => {
     // TODO -> implementar busca
+  };
+
+  const {enqueueSnackbar, closeSnackbar} = useSnackbar();
+
+    const confirm = useConfirm();
+
+  const handleDelete = async () => {
+    try {
+      await confirm({
+        title: "Deseja excluir mesmo?",
+        content: (
+          <Typography>Ao confirmar, o produto será excluído</Typography>
+        ),
+        confirmationText: "Excluir",
+        confirmationButtonProps: {
+          color: "error",
+          variant: "contained",
+          sx: {
+            mb: 2,
+            mr: 2,
+          },
+        },
+        cancellationText: "Cancelar",
+        cancellationButtonProps: {
+          variant: "outlined",
+          sx: {
+            mb: 2,
+            mr: 1,
+          },
+        },
+      });
+
+      enqueueSnackbar('The product has been deleted!', {variant: 'success'})
+
+    } catch (e) {
+      console.log("Erro", e);
+      enqueueSnackbar('Error to delete the product!', {variant: 'error'})
+    }
   };
 
   const columns: GridColDef[] = [
@@ -37,7 +77,15 @@ export function MovimentacaoTable() {
       disableColumnMenu: true,
       disableExport: true,
       width: 80,
-      renderCell: () => <DeleteProduct />,
+      renderCell: ({row}) => 
+      <IconButton
+        onClick={handleDelete}
+        aria-label="delete"
+        color="error"
+        size="small"
+      >
+          <DeleteIcon />
+      </IconButton>
     },
   ];
 

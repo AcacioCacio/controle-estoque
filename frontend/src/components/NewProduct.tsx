@@ -88,12 +88,7 @@ function NewProduct(){
                         label="Quantidade"
                         variant="outlined"
                         sx={{width: "100%", mb: 2}}
-                    />
-                    <TextField 
-                        label="Data de Criação"
-                        variant="outlined"
-                        sx={{width: "100%", mb: 2}}
-                    />          
+                    />         
                 </DialogContent>
                 <DialogActions sx={{marginBottom: "15px", marginRight: "18px"}}>
                     <Button variant="contained" color="primary" onClick={handleNew}>
