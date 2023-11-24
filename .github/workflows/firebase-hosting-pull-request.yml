@@ -12,13 +12,17 @@ jobs:
         node-version: [18.x, 20.x, 21.x]
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: npm ci --package-lock /backend/package-lock.json
-      - run: npm run build --if-present --package-lock /backend/package-lock.json
-      - run: npm test --package-lock /backend/package-lock.json
+      - name: Install dependencies and run tests
+        working-directory: /backend # Set the working directory to /backend
+        run: |
+          npm ci
+          npm run build --if-present
+          npm test
       - uses: actions/checkout@v3
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
