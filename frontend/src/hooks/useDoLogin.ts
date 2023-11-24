@@ -24,8 +24,8 @@ const useDoLogin = (): HookReturn => {
       sessionStorage.setItem("token", response.acess_token);
 
       navigate("/home", { replace: true });
-    } catch (error) {
-      enqueueSnackbar(String(error), {
+    } catch (error: any) {
+      enqueueSnackbar(error.response.data.message, {
         variant: "error",
       });
     } finally {

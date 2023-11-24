@@ -21,7 +21,6 @@ const useCreateUser = (): HookReturn => {
 
       const formattedFormData = {
         ...userFormData,
-        name: userFormData.name.trim(),
         email: userFormData.email.trim().toLowerCase(),
       };
 
@@ -32,8 +31,8 @@ const useCreateUser = (): HookReturn => {
       enqueueSnackbar("Usuário criado com sucesso", {
         variant: "success",
       });
-    } catch (error) {
-      enqueueSnackbar(String(error), {
+    } catch (error: any) {
+      enqueueSnackbar(error.response.data.message[0], {
         variant: "error",
       });
     } finally {
