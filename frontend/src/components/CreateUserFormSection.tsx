@@ -9,6 +9,7 @@ import {
   FIELD_MIN_LENGTH,
   REQUIRED_FIELD,
   VALID_EMAIL,
+  WEAK_PASSWORD,
 } from "../data/inputErrorTexts";
 
 function getDefaultValues() {
@@ -16,13 +17,18 @@ function getDefaultValues() {
 }
 
 function getFormValidationSchema(): Yup.AnyObjectSchema {
+  const strongPasswordRegex =
+    /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
+
+  const strongPasswordValidation = Yup.string()
+    .matches(strongPasswordRegex, WEAK_PASSWORD)
+    .min(6, FIELD_MIN_LENGTH)
+    .max(20, FIELD_MAX_LENGTH);
+
   return Yup.object({
     name: Yup.string().required(REQUIRED_FIELD),
     email: Yup.string().email(VALID_EMAIL).required(REQUIRED_FIELD),
-    password: Yup.string()
-      .required(REQUIRED_FIELD)
-      .min(6, FIELD_MIN_LENGTH)
-      .max(20, FIELD_MAX_LENGTH),
+    password: strongPasswordValidation.required(REQUIRED_FIELD),
   });
 }
 
