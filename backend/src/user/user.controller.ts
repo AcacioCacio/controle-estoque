@@ -1,14 +1,6 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Param,
-  Delete,
-  Body,
-  Query,
-} from '@nestjs/common';
-import { UserService } from '../user/user.service';
-import { CreateUserDto } from '../user/dto/create-user.dto';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { UserService } from './user.service';
+import { CreateUserDto } from './dto/create-user.dto';
 import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 
 @Controller('user')
@@ -20,6 +12,17 @@ export class UserController {
   async create(@Body() createUserDto: CreateUserDto) {
     try {
       const result = await this.userService.create(createUserDto);
+      return { message: result };
+    } catch (error) {
+      return { error: error.message };
+    }
+  }
+
+  @Get()
+  async findAll() {
+    try {
+      const result = await this.userService.findAll();
+
       return { message: result };
     } catch (error) {
       return { error: error.message };
