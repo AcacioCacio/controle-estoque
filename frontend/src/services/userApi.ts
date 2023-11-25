@@ -1,6 +1,7 @@
 import { UserFormData } from "../types/UserFormData";
 import { AuthFormData } from "../types/AuthFormData";
 import { UserToken } from "../types/UserToken";
+import { User } from "../types/User";
 import httpClient from "../lib/httpClient";
 
 export type FirebaseReturn =
@@ -18,6 +19,19 @@ async function create(userFormData: UserFormData): Promise<FirebaseReturn> {
   return response.data;
 }
 
+async function findAll(): Promise<User[]> {
+  const client = httpClient();
+
+  const token = sessionStorage.getItem("token");
+
+  const response = await client.get<any>(
+    `${process.env.REACT_APP_API_URL}/user`,
+    { headers: { Authorization: `Bearer ${token}` } },
+  );
+
+  return response.data.message;
+}
+
 async function auth(authFormData: AuthFormData): Promise<UserToken> {
   const client = httpClient();
 
@@ -32,6 +46,7 @@ async function auth(authFormData: AuthFormData): Promise<UserToken> {
 const userApi = {
   create,
   auth,
+  findAll,
 };
 
 export default userApi;

@@ -26,6 +26,10 @@ export function Navbar(): JSX.Element {
     navigate("/home/movimentacao", { replace: true });
   };
 
+  const goToUsuarios = () => {
+    navigate("/home/usuarios", { replace: true });
+  };
+
   const handleLogout = async () => {
     try {
       await confirm({
@@ -88,6 +92,11 @@ export function Navbar(): JSX.Element {
               <Grid item>
                 <Button color="inherit" onClick={goToMovimentacao}>
                   Movimentações
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button color="inherit" onClick={goToUsuarios}>
+                  Usuarios
                 </Button>
               </Grid>
               <Grid item>

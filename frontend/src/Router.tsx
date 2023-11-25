@@ -3,6 +3,7 @@ import { AuthView } from "./pages/AuthView";
 import { HomeView } from "./pages/HomeView";
 import { EstoqueTable } from "./components/EstoqueTable";
 import { MovimentacaoTable } from "./components/MovimentacaoTable";
+import { UsuariosTable } from "./components/UsuariosTable";
 import App from "./App";
 
 function Router() {
@@ -14,6 +15,7 @@ function Router() {
           <Route path="home" element={<HomeView />}>
             <Route path="estoque" element={<EstoqueTable />} />
             <Route path="movimentacao" element={<MovimentacaoTable />} />
+            <Route path="usuarios" element={<UsuariosTable />} />
             <Route index element={<Navigate to="estoque" />} />
           </Route>
           <Route index element={<AuthView />} />
