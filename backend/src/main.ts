@@ -9,7 +9,7 @@ async function bootstrap() {
     origin: 'http://localhost:3000', // TODO -> inserir no .env ou afins
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
-    allowedHeaders: 'Content-Type, Accept',
+    allowedHeaders: 'Authorization, Content-Type, Accept',
   });
 
   app.useGlobalPipes(
