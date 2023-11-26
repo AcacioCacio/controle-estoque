@@ -27,8 +27,8 @@ async function create(
 }
 
 async function update(
-  productFormData: ProductFormData,
   id: string,
+  productFormData: ProductFormData,
 ): Promise<FirebaseReturn> {
   const client = httpClient();
 
