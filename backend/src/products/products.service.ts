@@ -48,6 +48,21 @@ export class ProductsService {
     return product.data();
   }
 
+  async findAllParams() {
+    const docRef = await this.firestore.collection('products').get();
+
+    const products = [];
+
+    docRef.forEach((doc) => {
+      products.push({
+        id: doc.id,
+        name: doc.data().name,
+      });
+    });
+
+    return products;
+  }
+
   async update(id: string, updateProductDto: UpdateProductDto) {
     const docRef = this.firestore.collection('products').doc(id);
     const DateMillis = dayjs().valueOf();

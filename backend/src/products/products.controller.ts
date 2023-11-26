@@ -39,6 +39,17 @@ export class ProductsController {
   }
 
   @IsPublic()
+  @Get('/params')
+  async findAllParams() {
+    try {
+      const result = await this.productsService.findAllParams();
+      return { produtos: result };
+    } catch (error) {
+      return { error: error.message, errorCode: error.code };
+    }
+  }
+
+  @IsPublic()
   @Get(':id')
   async findOne(@Param('id') id: string) {
     try {
