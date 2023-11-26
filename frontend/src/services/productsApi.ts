@@ -24,6 +24,37 @@ async function create(productFormData: ProductFormData): Promise<FirebaseReturn>
   return response.data;
 }
 
+async function update(productFormData: ProductFormData, id: string): Promise<FirebaseReturn> {
+  const client = httpClient();
+
+  const formData = {
+    ...productFormData,
+    quant: +productFormData.quant
+  }
+
+  const token = sessionStorage.getItem("token");
+
+  const response = await client.patch<FirebaseReturn>(
+    `${process.env.REACT_APP_API_URL}/products/${id}`,
+    formData,
+    { headers: { Authorization: `Bearer ${token}` } },
+  );
+
+  return response.data;
+}
+
+async function remove(id: string): Promise<void> {
+
+  const token = sessionStorage.getItem("token");
+
+  const response = await client.delete<void>(
+    `${process.env.REACT_APP_API_URL}/products/${id}`,
+    { headers: { Authorization: `Bearer ${token}` } },
+  );
+
+  return response.data;
+}
+
 
 async function findAll(): Promise<any[]> {
   const client = httpClient();
@@ -35,12 +66,14 @@ async function findAll(): Promise<any[]> {
     { headers: { Authorization: `Bearer ${token}` } },
   );
 
-  return response.data.message;
+  return response.data;
 }
 
 const productsApi = {
   findAll,
   create,
+  update,
+  delete
 };
 
 export default productsApi;
