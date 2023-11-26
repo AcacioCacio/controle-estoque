@@ -7,10 +7,7 @@ import {
     DialogTitle,
     Stack,
     TextField,
-    Typography
 } from '@mui/material';
-import { useConfirm } from "material-ui-confirm";
-import { SnackbarProvider, useSnackbar } from 'notistack';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -45,7 +42,7 @@ function NewProduct(){
         setOpen(false);
     };
 
-    const defaultValues = getDefaultValues();
+  const defaultValues = getDefaultValues();
   const validationSchema = getFormValidationSchema();
 
   const methods = useForm<any>({
@@ -56,8 +53,6 @@ function NewProduct(){
   const onCreateProduct = (formData: ProductFormData) => {
     createProduct(formData);
   };
-
-    const confirm = useConfirm();
 
     return(
         <>

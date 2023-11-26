@@ -80,7 +80,7 @@ export function EstoqueTable() {
       disableColumnMenu: true,
       disableExport: true,
       width: 80,
-      renderCell: ({row}) => <UpdateProduct />,
+      renderCell: ({row}) => <UpdateProduct row={row}/>,
     },
     {
       field: "delete",

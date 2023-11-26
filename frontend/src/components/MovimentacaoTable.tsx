@@ -3,17 +3,21 @@ import { Box, IconButton, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Searchbar } from "./Searchbar";
 import NewProduct from "./NewProduct";
-import UpdateProduct from "./UpdateProduct";
 import { useConfirm } from "material-ui-confirm";
-import { useSnackbar } from 'notistack';
+import { useSnackbar } from "notistack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useMovementsList from "../hooks/useMovementsList";
 
-const meuTexto = 'Movimentação';
+const meuTexto = "Movimentação";
 
 export function MovimentacaoTable() {
-  const { movimentacoes, setMovimentacoes, movimentacoesTotal, isLoading, listRefresh } =
-  useMovementsList();
+  const {
+    movimentacoes,
+    setMovimentacoes,
+    movimentacoesTotal,
+    isLoading,
+    listRefresh,
+  } = useMovementsList();
 
   const handleSearch = (search?: string) => {
     if (search) {
@@ -27,17 +31,15 @@ export function MovimentacaoTable() {
     }
   };
 
-  const {enqueueSnackbar, closeSnackbar} = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-    const confirm = useConfirm();
+  const confirm = useConfirm();
 
   const handleDelete = async () => {
     try {
       await confirm({
         title: "Deseja excluir mesmo?",
-        content: (
-          <Typography>Ao confirmar, o produto será excluído</Typography>
-        ),
+        content: <Typography>Ao confirmar, o produto será excluído</Typography>,
         confirmationText: "Excluir",
         confirmationButtonProps: {
           color: "error",
@@ -57,29 +59,23 @@ export function MovimentacaoTable() {
         },
       });
 
-      enqueueSnackbar('The product has been deleted!', {variant: 'success'})
-
+      enqueueSnackbar("The product has been deleted!", { variant: "success" });
     } catch (e) {
       console.log("Erro", e);
-      enqueueSnackbar('Error to delete the product!', {variant: 'error'})
+      enqueueSnackbar("Error to delete the product!", { variant: "error" });
     }
   };
 
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID", width: 90 },
     { field: "nameProduct", headerName: "Produto", minWidth: 150, flex: 1 },
-    { field: "quant", headerName: "Quantidade movimentada", minWidth: 150, flex: 1 },
-    { field: "type", headerName: "Tipo de transação", width: 600 },
     {
-      field: "edit",
-      headerName: "Edit",
-      sortable: false,
-      filterable: false,
-      disableColumnMenu: true,
-      disableExport: true,
-      width: 80,
-      renderCell: () => <UpdateProduct />,
+      field: "quant",
+      headerName: "Quantidade movimentada",
+      minWidth: 150,
+      flex: 1,
     },
+    { field: "type", headerName: "Tipo de transação", width: 600 },
     {
       field: "delete",
       headerName: "Delete",
@@ -88,15 +84,16 @@ export function MovimentacaoTable() {
       disableColumnMenu: true,
       disableExport: true,
       width: 80,
-      renderCell: ({row}) => 
-      <IconButton
-        onClick={handleDelete}
-        aria-label="delete"
-        color="error"
-        size="small"
-      >
+      renderCell: ({ row }) => (
+        <IconButton
+          onClick={handleDelete}
+          aria-label="delete"
+          color="error"
+          size="small"
+        >
           <DeleteIcon />
-      </IconButton>
+        </IconButton>
+      ),
     },
   ];
 
@@ -107,7 +104,7 @@ export function MovimentacaoTable() {
           justifyContent: "space-between",
           alignItems: "center",
           display: "flex",
-          flexDirection: "row",  
+          flexDirection: "row",
           marginTop: "30px",
           fontSize: "30px",
         }}
@@ -121,7 +118,7 @@ export function MovimentacaoTable() {
           justifyContent: "space-between",
           alignItems: "center",
           display: "flex",
-          flexDirection: "row",  
+          flexDirection: "row",
           marginTop: "5px",
           marginBottom: "19px",
         }}

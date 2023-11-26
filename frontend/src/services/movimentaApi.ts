@@ -1,9 +1,5 @@
 import httpClient from "../lib/httpClient";
 
-// export type FirebaseReturn =
-//   | { message: string; error?: undefined }
-//   | { error: any; message?: undefined };
-
 async function findAll(): Promise<any[]> {
   const client = httpClient();
 
@@ -14,7 +10,7 @@ async function findAll(): Promise<any[]> {
     { headers: { Authorization: `Bearer ${token}` } },
   );
 
-  return response.data.message;
+  return response.data;
 }
 
 const movementsApi = {
