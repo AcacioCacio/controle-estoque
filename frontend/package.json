@@ -7,8 +7,8 @@
     "@emotion/style": "^0.8.0",
     "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.3.2",
-    "@mui/icons-material": "^5.14.14",
-    "@mui/material": "^5.14.14",
+    "@mui/icons-material": "^5.14.18",
+    "@mui/material": "^5.14.18",
     "@mui/styled-engine-sc": "^6.0.0-alpha.2",
     "@mui/styles": "^5.14.14",
     "@mui/x-data-grid": "^6.16.3",
@@ -23,9 +23,9 @@
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.6.1",
     "dayjs": "^1.11.10",
+    "firebase": "^10.6.0",
     "material-ui-confirm": "^3.0.7",
     "notistack": "^3.0.1",
-    "package": "^1.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.47.0",
@@ -62,5 +62,9 @@
   },
   "devDependencies": {
     "prettier": "3.0.3"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }

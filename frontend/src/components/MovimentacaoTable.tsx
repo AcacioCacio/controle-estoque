@@ -4,16 +4,27 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Searchbar } from "./Searchbar";
 import NewProduct from "./NewProduct";
 import UpdateProduct from "./UpdateProduct";
-import { movimentacaoMock } from "../data/movimentacaoMock";
 import { useConfirm } from "material-ui-confirm";
 import { useSnackbar } from 'notistack';
 import DeleteIcon from "@mui/icons-material/Delete";
+import useMovementsList from "../hooks/useMovementsList";
 
 const meuTexto = 'Movimentação';
 
 export function MovimentacaoTable() {
+  const { movimentacoes, setMovimentacoes, movimentacoesTotal, isLoading, listRefresh } =
+  useMovementsList();
+
   const handleSearch = (search?: string) => {
-    // TODO -> implementar busca
+    if (search) {
+      setMovimentacoes(
+        movimentacoes.filter((movimentacao) =>
+          movimentacao.nameProduct.toLowerCase().includes(search.toLowerCase()),
+        ),
+      );
+    } else {
+      listRefresh();
+    }
   };
 
   const {enqueueSnackbar, closeSnackbar} = useSnackbar();
@@ -129,8 +140,13 @@ export function MovimentacaoTable() {
         }}
       >
         <DataGrid
-          rows={movimentacaoMock}
+          rows={movimentacoes}
           columns={columns}
+          loading={isLoading}
+          autoHeight
+          disableColumnMenu
+          pagination
+          rowCount={movimentacoesTotal}
           initialState={{
             pagination: {
               paginationModel: {

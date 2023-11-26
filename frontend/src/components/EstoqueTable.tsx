@@ -1,8 +1,7 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Box, IconButton, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Searchbar } from "./Searchbar";
-import { estoqueMock } from "../data/estoqueMock";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NewProduct from "./NewProduct";
 import UpdateProduct from "./UpdateProduct";
@@ -10,10 +9,23 @@ import { useConfirm } from "material-ui-confirm";
 import { useSnackbar } from 'notistack';
 import { format } from "path";
 import { ptBR } from "@mui/x-date-pickers/locales/ptBR";
+import useEstoqueList from "../hooks/useProductsList";
 
 export function EstoqueTable() {
+
+  const { produtos, setProdutos, produtosTotal, isLoading, listRefresh } =
+    useEstoqueList();
+
   const handleSearch = (search?: string) => {
-    // TODO -> implementar busca
+    if (search) {
+      setProdutos(
+        produtos.filter((produto) =>
+          produto.name.toLowerCase().includes(search.toLowerCase()),
+        ),
+      );
+    } else {
+      listRefresh();
+    }
   };
 
   const meuTexto = 'Estoque';
@@ -130,8 +142,13 @@ export function EstoqueTable() {
         }}
       >
         <DataGrid
-          rows={estoqueMock}
+          rows={produtos}
           columns={columns}
+          loading={isLoading}
+          autoHeight
+          disableColumnMenu
+          pagination
+          rowCount={produtosTotal}
           initialState={{
             pagination: {
               paginationModel: {

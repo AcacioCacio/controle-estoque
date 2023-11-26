@@ -5,14 +5,37 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
+    Stack,
     TextField,
     Typography
 } from '@mui/material';
 import { useConfirm } from "material-ui-confirm";
 import { SnackbarProvider, useSnackbar } from 'notistack';
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Controller, useForm } from "react-hook-form";
+import * as Yup from "yup";
+import {
+  REQUIRED_FIELD,
+} from "../data/inputErrorTexts";
+import useCreateProduct from '../hooks/useCreateProduct';
+import { ProductFormData } from '../types/ProductFormData';
+
+function getDefaultValues() {
+  return { name: "", quant: "0" };
+}
+
+function getFormValidationSchema(): Yup.AnyObjectSchema {
+  
+
+  return Yup.object({
+    name: Yup.string().required(REQUIRED_FIELD),
+    quant: Yup.string().required(REQUIRED_FIELD)
+  });
+}
 
 function NewProduct(){
     const [ open, setOpen ] = useState(false);
+    const createProduct = useCreateProduct();
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -22,43 +45,19 @@ function NewProduct(){
         setOpen(false);
     };
 
-    const {enqueueSnackbar, closeSnackbar} = useSnackbar();
+    const defaultValues = getDefaultValues();
+  const validationSchema = getFormValidationSchema();
+
+  const methods = useForm<any>({
+    defaultValues,
+    resolver: yupResolver(validationSchema),
+  });
+
+  const onCreateProduct = (formData: ProductFormData) => {
+    createProduct(formData);
+  };
 
     const confirm = useConfirm();
-
-    const handleNew = async () => {
-        try {
-          await confirm({
-            title: "Deseja criar mesmo?",
-            content: (
-              <Typography>Ao confirmar, o produto será criado</Typography>
-            ),
-            confirmationText: "Criar",
-            confirmationButtonProps: {
-              color: "info",
-              variant: "contained",
-              sx: {
-                mb: 2,
-                mr: 2,
-              },
-            },
-            cancellationText: "Cancelar",
-            cancellationButtonProps: {
-              variant: "outlined",
-              sx: {
-                mb: 2,
-                mr: 1,
-              },
-            },
-          });
-
-          enqueueSnackbar('The product has been created!', {variant: 'success'})
-
-        } catch (e) {
-          console.log("Erro", e);
-          enqueueSnackbar('Error to create the product!', {variant: 'error'})
-        }
-      };
 
     return(
         <>
@@ -75,29 +74,57 @@ function NewProduct(){
                 aria-labelledby='new-screen-overlay-title'
                 aria-describedby='new-screen-overlay-description'
             >
-                <DialogTitle id="new-screen-overlay-title">
+              <Stack
+                component="form"
+                onSubmit={methods.handleSubmit(onCreateProduct)}
+                noValidate
+                autoComplete="off"
+              >
+                <DialogTitle 
+                  
+                  id="new-screen-overlay-title">
                     Novo Produto
                 </DialogTitle>
                 <DialogContent>
-                    <TextField 
+                  <Controller
+                    name="name"
+                    control={methods.control}
+                    render={({ field, fieldState }) => (
+                      <TextField
                         label="Nome do Produto"
                         variant="outlined"
-                        sx={{width: "100%", mb: 2}}
-                    />
-                    <TextField 
+                        sx={{ width: "100%" }}
+                        {...field}
+                        error={fieldState.invalid}
+                        helperText={fieldState.error && fieldState.error.message}
+                      />
+                    )}
+                  />
+                  <Controller
+                    name="quant"
+                    control={methods.control}
+                    render={({ field, fieldState }) => (
+                      <TextField
                         label="Quantidade"
+                        type="number"
                         variant="outlined"
-                        sx={{width: "100%", mb: 2}}
-                    />         
+                        sx={{ width: "100%" }}
+                        {...field}
+                        error={fieldState.invalid}
+                        helperText={fieldState.error && fieldState.error.message}
+                      />
+                    )}
+                  />
                 </DialogContent>
                 <DialogActions sx={{marginBottom: "15px", marginRight: "18px"}}>
-                    <Button variant="contained" color="primary" onClick={handleNew}>
+                    <Button type="submit" variant="contained" color="primary">
                         Confirm
                     </Button>
-                    <Button variant="contained" color='error' onClick={handleClose}>
+                    <Button  variant="contained" color='error' onClick={handleClose}>
                         Close
                     </Button>
                 </DialogActions>
+              </Stack>
             </Dialog>
         </>
     );
