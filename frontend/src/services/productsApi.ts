@@ -5,13 +5,15 @@ export type FirebaseReturn =
   | { message: string; error?: undefined }
   | { error: any; message?: undefined };
 
-async function create(productFormData: ProductFormData): Promise<FirebaseReturn> {
+async function create(
+  productFormData: ProductFormData,
+): Promise<FirebaseReturn> {
   const client = httpClient();
 
   const formData = {
     ...productFormData,
-    quant: +productFormData.quant
-  }
+    quant: +productFormData.quant,
+  };
 
   const token = sessionStorage.getItem("token");
 
@@ -24,13 +26,16 @@ async function create(productFormData: ProductFormData): Promise<FirebaseReturn>
   return response.data;
 }
 
-async function update(productFormData: ProductFormData, id: string): Promise<FirebaseReturn> {
+async function update(
+  productFormData: ProductFormData,
+  id: string,
+): Promise<FirebaseReturn> {
   const client = httpClient();
 
   const formData = {
     ...productFormData,
-    quant: +productFormData.quant
-  }
+    quant: +productFormData.quant,
+  };
 
   const token = sessionStorage.getItem("token");
 
@@ -44,17 +49,14 @@ async function update(productFormData: ProductFormData, id: string): Promise<Fir
 }
 
 async function remove(id: string): Promise<void> {
+  const client = httpClient();
 
   const token = sessionStorage.getItem("token");
 
-  const response = await client.delete<void>(
-    `${process.env.REACT_APP_API_URL}/products/${id}`,
-    { headers: { Authorization: `Bearer ${token}` } },
-  );
-
-  return response.data;
+  await client.delete<void>(`${process.env.REACT_APP_API_URL}/products/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 }
-
 
 async function findAll(): Promise<any[]> {
   const client = httpClient();
@@ -73,7 +75,7 @@ const productsApi = {
   findAll,
   create,
   update,
-  delete
+  remove,
 };
 
 export default productsApi;
