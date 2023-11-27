@@ -2,8 +2,11 @@ import { ProductFormData } from "../types/ProductFormData";
 import { useSnackbar } from "notistack";
 import productsApi from "../services/productsApi";
 
-type HookReturn = (id: string, productFormData: ProductFormData) => void;
-
+type HookReturn = (
+  id: string,
+  productFormData: ProductFormData,
+  handleClose: () => void,
+) => void;
 
 const useUpdateProduct = (): HookReturn => {
   const { enqueueSnackbar } = useSnackbar();
@@ -11,9 +14,12 @@ const useUpdateProduct = (): HookReturn => {
   return async (
     id: string,
     productFormData: ProductFormData,
+    handleClose: () => void,
   ): Promise<void> => {
     try {
       await productsApi.update(id, productFormData);
+
+      handleClose();
 
       enqueueSnackbar("Produto criado com sucesso", {
         variant: "success",

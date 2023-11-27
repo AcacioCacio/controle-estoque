@@ -54,7 +54,7 @@ function UpdateProduct({ row }: Props): JSX.Element {
   });
 
   const onUpdateProduct = (formData: ProductFormData) => {
-    updateProduct(row.id, formData);
+    updateProduct(row.id, formData, handleClose);
   };
 
   return (
@@ -88,7 +88,6 @@ function UpdateProduct({ row }: Props): JSX.Element {
           noValidate
           autoComplete="off"
         >
-          <DialogTitle id="new-screen-overlay-title">Novo Produto</DialogTitle>
           <DialogContent>
             <Controller
               name="name"
@@ -97,7 +96,7 @@ function UpdateProduct({ row }: Props): JSX.Element {
                 <TextField
                   label="Nome do Produto"
                   variant="outlined"
-                  sx={{ width: "100%", paddingBottom: '15px' }}
+                  sx={{ width: "100%", paddingBottom: "15px" }}
                   {...field}
                   error={fieldState.invalid}
                   helperText={fieldState.error && fieldState.error.message}

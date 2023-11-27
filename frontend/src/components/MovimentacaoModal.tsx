@@ -20,7 +20,7 @@ import useCreateMovement from "../hooks/useCreateMovement";
 
 function getDefaultValues() {
   return {
-    idProduct: null,
+    idProduct: "",
     type: "doacao",
     quant: "0",
   };
@@ -110,7 +110,9 @@ function MovimentacaoModal() {
           noValidate
           autoComplete="off"
         >
-          <DialogTitle id="new-screen-overlay-title">Novo Produto</DialogTitle>
+          <DialogTitle id="new-screen-overlay-title">
+            Nova movimentação
+          </DialogTitle>
           <DialogContent>
             <Controller
               name="idProduct"
@@ -124,6 +126,7 @@ function MovimentacaoModal() {
                   error={fieldState.invalid}
                   displayEmpty
                 >
+                  <MenuItem value="">Selecione um produto</MenuItem>
                   {selectOptions.map((product) => (
                     <MenuItem key={product.id} value={product.id}>
                       {product.name}
@@ -139,7 +142,7 @@ function MovimentacaoModal() {
                 <Select
                   label="Tipo de transação"
                   variant="outlined"
-                  sx={{ width: "100%" }}
+                  sx={{ width: "100%", mt: 1 }}
                   {...field}
                   error={fieldState.invalid}
                   displayEmpty
@@ -160,7 +163,7 @@ function MovimentacaoModal() {
                   label="Quantidade"
                   type="number"
                   variant="outlined"
-                  sx={{ width: "100%" }}
+                  sx={{ width: "100%", mt: 1 }}
                   {...field}
                   error={fieldState.invalid}
                   helperText={fieldState.error && fieldState.error.message}
