@@ -24,13 +24,13 @@
 
 <h1>FrontEnd</h1>
 <ul>
-  <l1>React - Versão: 18.2.0</l1>
+  <li>React - Versão: 18.2.0</li>
   <li>TypeScript - Versão: 4.9.5</li>
 </ul>
 
 <h1>BackEnd</h1>
 <ul>
-  <l1>Nest - Versão: 10.0.0</l1>
+  <li>Nest - Versão: 10.0.0</li>
   <li>Firebase - Versão: 7.1.0</li>
 </ul>
 
