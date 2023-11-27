@@ -20,7 +20,12 @@ const useEstoqueList = (): HookReturn => {
 
       const produtos = await productsApi.findAll();
 
-      setList(produtos);
+      const formattedProdutos = produtos.map((produto) => ({
+        ...produto,
+        date: new Date(produto.date),
+      }));
+
+      setList(formattedProdutos);
     } catch (e) {
       console.error(e);
     } finally {

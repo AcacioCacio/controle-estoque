@@ -68,7 +68,7 @@ async function findAll(): Promise<any[]> {
     { headers: { Authorization: `Bearer ${token}` } },
   );
 
-  return response.data;
+  return response.data.produtos;
 }
 
 async function findSelectOptions(): Promise<any[]> {

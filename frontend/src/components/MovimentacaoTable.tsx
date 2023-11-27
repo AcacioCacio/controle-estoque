@@ -29,7 +29,6 @@ export function MovimentacaoTable() {
   };
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 90 },
     { field: "nameProduct", headerName: "Produto", minWidth: 150, flex: 1 },
     {
       field: "quant",

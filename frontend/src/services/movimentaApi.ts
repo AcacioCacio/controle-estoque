@@ -36,7 +36,7 @@ async function findAll(): Promise<any[]> {
     { headers: { Authorization: `Bearer ${token}` } },
   );
 
-  return response.data;
+  return response.data.movimentacoes;
 }
 
 const movementsApi = {

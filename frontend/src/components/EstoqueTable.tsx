@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { Box, IconButton, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Searchbar } from "./Searchbar";
@@ -6,12 +6,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import NewProduct from "./NewProduct";
 import UpdateProduct from "./UpdateProduct";
 import { useConfirm } from "material-ui-confirm";
-import { useSnackbar } from 'notistack';
 import useEstoqueList from "../hooks/useProductsList";
 import useDeleteProduct from "../hooks/useDeleteProducts";
 
 export function EstoqueTable() {
-
   const { produtos, setProdutos, produtosTotal, isLoading, listRefresh } =
     useEstoqueList();
 
@@ -29,20 +27,15 @@ export function EstoqueTable() {
 
   const deleteProduct = useDeleteProduct();
 
-  const meuTexto = 'Estoque';
-
-  const {enqueueSnackbar, closeSnackbar} = useSnackbar();
+  const meuTexto = "Estoque";
 
   const confirm = useConfirm();
 
   const handleDelete = async (id: string) => {
-   
     try {
       await confirm({
         title: "Deseja excluir mesmo?",
-        content: (
-          <Typography>Ao confirmar, o produto será excluído</Typography>
-        ),
+        content: <Typography>Ao confirmar, o produto será excluído</Typography>,
         confirmationText: "Excluir",
         confirmationButtonProps: {
           color: "error",
@@ -63,17 +56,15 @@ export function EstoqueTable() {
       });
 
       deleteProduct(id);
-
     } catch (e) {
       console.log("Erro", e);
     }
   };
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 90 },
     { field: "name", headerName: "Product", minWidth: 150, flex: 1 },
     { field: "quant", headerName: "Quantidade", minWidth: 150, flex: 1 },
-    { field: "date", headerName: "CreatedAt", type:'date', width: 600 },
+    { field: "date", headerName: "CreatedAt", type: "date", width: 600 },
     {
       field: "edit",
       headerName: "Edit",
@@ -82,7 +73,7 @@ export function EstoqueTable() {
       disableColumnMenu: true,
       disableExport: true,
       width: 80,
-      renderCell: ({row}) => <UpdateProduct row={row}/>,
+      renderCell: ({ row }) => <UpdateProduct row={row} />,
     },
     {
       field: "delete",
@@ -92,15 +83,16 @@ export function EstoqueTable() {
       disableColumnMenu: true,
       disableExport: true,
       width: 80,
-      renderCell: ({row}) => 
-      <IconButton
-        onClick={() => handleDelete(row.id)}
-        aria-label="delete"
-        color="error"
-        size="small"
-      >
-          <DeleteIcon/>
-      </IconButton>
+      renderCell: ({ row }) => (
+        <IconButton
+          onClick={() => handleDelete(row.id)}
+          aria-label="delete"
+          color="error"
+          size="small"
+        >
+          <DeleteIcon />
+        </IconButton>
+      ),
     },
   ];
 
@@ -111,7 +103,7 @@ export function EstoqueTable() {
           justifyContent: "space-between",
           alignItems: "center",
           display: "flex",
-          flexDirection: "row",  
+          flexDirection: "row",
           marginTop: "30px",
           fontSize: "30px",
         }}
