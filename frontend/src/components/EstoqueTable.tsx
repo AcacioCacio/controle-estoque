@@ -7,9 +7,8 @@ import NewProduct from "./NewProduct";
 import UpdateProduct from "./UpdateProduct";
 import { useConfirm } from "material-ui-confirm";
 import { useSnackbar } from 'notistack';
-import { format } from "path";
-import { ptBR } from "@mui/x-date-pickers/locales/ptBR";
 import useEstoqueList from "../hooks/useProductsList";
+import useDeleteProduct from "../hooks/useDeleteProducts";
 
 export function EstoqueTable() {
 
@@ -28,13 +27,16 @@ export function EstoqueTable() {
     }
   };
 
+  const deleteProduct = useDeleteProduct();
+
   const meuTexto = 'Estoque';
 
   const {enqueueSnackbar, closeSnackbar} = useSnackbar();
 
-    const confirm = useConfirm();
+  const confirm = useConfirm();
 
-  const handleDelete = async () => {
+  const handleDelete = async (id: string) => {
+   
     try {
       await confirm({
         title: "Deseja excluir mesmo?",
@@ -60,7 +62,7 @@ export function EstoqueTable() {
         },
       });
 
-      enqueueSnackbar('The product has been deleted!', {variant: 'success'})
+      deleteProduct(id);
 
     } catch (e) {
       console.log("Erro", e);
@@ -92,12 +94,12 @@ export function EstoqueTable() {
       width: 80,
       renderCell: ({row}) => 
       <IconButton
-        onClick={handleDelete}
+        onClick={() => handleDelete(row.id)}
         aria-label="delete"
         color="error"
         size="small"
       >
-          <DeleteIcon />
+          <DeleteIcon/>
       </IconButton>
     },
   ];
