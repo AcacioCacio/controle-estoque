@@ -18,9 +18,9 @@ const useMovimentacaoList = (): HookReturn => {
     try {
       setListIsLoading(true);
 
-      const produtos = await movimentaApi.findAll();
+      const movimentacoes = await movimentaApi.findAll();
 
-      setList(produtos);
+      setList(movimentacoes);
     } catch (e) {
       console.error(e);
     } finally {
