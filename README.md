@@ -74,6 +74,8 @@
 <p>- Isso deverá exibir a versão do Node.js instalada no seu sistema. Para verificar a versão do npm, você pode digitar: <strong>npm -v</strong></p>
 
 <h2>Git:</h2>
+<h3>Link para Download: https://git-scm.com/download/win</h3>
+<h3>Versão: 2.43.0</h3>
 <ul>
   <li>Passo 1: Baixe o instalador do Git para Windows no site oficial do Git: Git for Windows</li>
   <li>Passo 2: Após o download, execute o instalador.</li>
@@ -132,3 +134,30 @@
   <li>Passo 2: Abrindo um novo terminal (Tutorial de como abrir o terminal no Passo 1 – Instalando dependências) OBS: devemos ter dois terminais abertos simultâneos. vamos utilizar o comando “cd frontend” e com a pasta do frontend aberta vamos utilizar o comando “npm run start”.</li>
   <li>Passo 3: o Aplicativo irá abrir em nosso navegador.</li>
 </ul>
+
+<h2>Tutorial para testar o sistema</h2>
+
+<h2>Equipe:</h2>
+<ul>
+<li>Carlos Henrique Camilo Gomes</li>
+<li>Acácio Pereira Lopes Jorge</li>
+<li>Marco Aurélio de Jesus Nascimento</li>
+<li>Kleverson Kenji Iwatani</li>
+<li>João Pedro Martins Espindola</li>
+</ul>
+
+<h2>Objetivo do Sistema: Controle de estoque</h2>
+<h2>Funcionalidades desenvolvidas</h2>
+<ul>
+<li>Cadastro e Login de usuários;</li>
+<li>Validação de login ( Caso usuário não esteja logado ele não consegue acessar o sistema);</li>
+<li>Cadastro, Exclusão e Modificação de produtos;</li>
+<li>Entrada e Saídas de produtos através das Movimentações;</li>
+<li>Listagem de usuários.</li>
+</ul>
+
+<h2>Roteiro a ser seguido:</h2>
+<p>Deve primeiro criar um cadastro de usuário e depois logar no sistema para ter acesso ao controle do estoque</p>
+
+<h2>Contas de Acesso padrão</h2>
+<h2>Email: kenji@gmail.com Senha:g$FMtZ<B^,</h2>
