@@ -68,10 +68,9 @@ function MovimentacaoModal() {
   const createMovement = useCreateMovement();
 
   useEffect(() => {
-    productsApi.findSelectOptions().then((res: any) => {
-      console.log("res:", res.produtos);
-      setSelectOptions(res.produtos);
-    });
+    productsApi
+      .findSelectOptions()
+      .then((res: any) => setSelectOptions(res.produtos));
   }, []);
 
   const handleClickOpen = () => {
