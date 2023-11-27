@@ -15,7 +15,12 @@ const useCreateMovement = (): HookReturn => {
     handleClose: () => void,
   ): Promise<void> => {
     try {
-      await movementsApi.create(movimentacaoFormData);
+      const response = await movementsApi.create(movimentacaoFormData);
+
+      if (response.error) {
+        enqueueSnackbar(response.error, { variant: "error" });
+        return;
+      }
 
       handleClose();
 
