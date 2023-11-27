@@ -16,7 +16,6 @@ import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-  @IsPublic()
   @Post()
   async create(@Body() createProductDto: CreateProductDto) {
     try {
@@ -27,7 +26,6 @@ export class ProductsController {
     }
   }
 
-  @IsPublic()
   @Get()
   async findAll() {
     try {
@@ -38,7 +36,6 @@ export class ProductsController {
     }
   }
 
-  @IsPublic()
   @Get('/params')
   async findAllParams() {
     try {
@@ -49,7 +46,6 @@ export class ProductsController {
     }
   }
 
-  @IsPublic()
   @Get(':id')
   async findOne(@Param('id') id: string) {
     try {
@@ -60,7 +56,6 @@ export class ProductsController {
     }
   }
 
-  @IsPublic()
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -74,7 +69,6 @@ export class ProductsController {
     }
   }
 
-  @IsPublic()
   @Delete(':id')
   async remove(@Param('id') id: string) {
     try {
