@@ -70,6 +70,13 @@ function NewProduct(){
                 aria-describedby='new-screen-overlay-description'
             >
               <Stack
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "90%",
+                  gap: 2,
+                  px: 2,
+                }}
                 component="form"
                 onSubmit={methods.handleSubmit(onCreateProduct)}
                 noValidate
@@ -88,7 +95,7 @@ function NewProduct(){
                       <TextField
                         label="Nome do Produto"
                         variant="outlined"
-                        sx={{ width: "100%" }}
+                        sx={{ width: "100%", paddingBottom: '15px' }}
                         {...field}
                         error={fieldState.invalid}
                         helperText={fieldState.error && fieldState.error.message}
