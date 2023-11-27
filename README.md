@@ -22,9 +22,23 @@
 
 <h2>Tutorial para compilar e executar o sistema</h2>
 
+<h1>FrontEnd</h1>
+<ul>
+  <l1>React - Versão: 18.2.0</l1>
+  <li>TypeScript - Versão: 4.9.5</li>
+</ul>
+
+<h1>BackEnd</h1>
+<ul>
+  <l1>Nest - Versão: 10.0.0</l1>
+  <li>Firebase - Versão: 7.1.0</li>
+</ul>
+
 <h2>Instalando Ferramentas</h2>
 
 <h2>Visual Studio Code:</h2>
+<h3>Link para Download: https://code.visualstudio.com</h3>
+<h3>Versão: 1.84.2</h3>
 <ul>
   <li>Passo 1: Acesse o site oficial do Visual Studio Code em Visual Studio Code - Download.</li>
   <li>Passo 2: Clique no botão "Download for Windows" para baixar o instalador do VS Code.</li>
@@ -34,6 +48,8 @@
 </ul>
 
 <h2>Yarn:</h2>
+<h3>Link para Download: https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable</h3>
+<h3>Versão: 4.0.2</h3>
 <ul>
   <li>Passo 1: Baixe o instalador do Yarn para Windows no site oficial do Yarn: Yarn - Installation</li>
   <li>Passo 2: Após o download, execute o instalador.</li>
@@ -44,6 +60,8 @@
 <p>- Isso deverá exibir a versão do Yarn instalada no seu sistema.</p>
 
 <h2>Node.js:</h2>
+<h3>Link para Download: https://nodejs.org/en</h3>
+<h3>Versão: 20.10.0</h3>
 <ul>
   <li>Passo 1: Acesse o site oficial do Node.js em Node.js website.</li>
   <li>Passo 2: Na página inicial, clique no botão "Downloads" para baixar o instalador do Node.js.</li>
