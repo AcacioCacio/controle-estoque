@@ -71,11 +71,25 @@ async function findAll(): Promise<any[]> {
   return response.data;
 }
 
+async function findSelectOptions(): Promise<any[]> {
+  const client = httpClient();
+
+  const token = sessionStorage.getItem("token");
+
+  const response = await client.get<any>(
+    `${process.env.REACT_APP_API_URL}/products/params`,
+    { headers: { Authorization: `Bearer ${token}` } },
+  );
+
+  return response.data;
+}
+
 const productsApi = {
   findAll,
   create,
   update,
   remove,
+  findSelectOptions,
 };
 
 export default productsApi;
